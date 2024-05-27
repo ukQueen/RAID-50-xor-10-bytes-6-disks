@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e900cb73-f5d5-46ec-87a7-8724c134ee80" name="Changes" comment="We just add PDF" />
+    <list default="true" id="e900cb73-f5d5-46ec-87a7-8724c134ee80" name="Changes" comment="PDF file has been added">
+      <change beforePath="$PROJECT_DIR$/Programm/disk_0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programm/disk_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programm/disk_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programm/disk_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programm/disk_4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programm/disk_5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_5.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,8 +98,27 @@
       <option name="project" value="LOCAL" />
       <updated>1716774034395</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="PDF file has been added">
+      <option name="closed" value="true" />
+      <created>1716780888708</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1716780888708</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -100,6 +126,7 @@
     <MESSAGE value="write and read are complete. reconstruction is not yet" />
     <MESSAGE value="Finished version of this project, but without pdf and README.txt" />
     <MESSAGE value="We just add PDF" />
-    <option name="LAST_COMMIT_MESSAGE" value="We just add PDF" />
+    <MESSAGE value="PDF file has been added" />
+    <option name="LAST_COMMIT_MESSAGE" value="PDF file has been added" />
   </component>
 </project>
