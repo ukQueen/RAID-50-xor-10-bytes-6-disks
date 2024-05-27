@@ -7,9 +7,9 @@ RAID_5_2 = ['disk_3.txt', 'disk_4.txt', 'disk_5.txt']
 disks_indexes = []
 
 
-
 def xor_two_str(a: str, b: str) -> str:
     return ''.join([chr(ord(x) ^ ord(y)) for x, y in zip(a, b)])
+
 
 def reconstruction(disks_index: int) -> None:
     global disks_indexes
@@ -27,20 +27,36 @@ def reconstruction(disks_index: int) -> None:
     list_of_data = []
     for i in range(len(problematische_Raid)):
         if i != problematische_index:
-            file = open(problematische_Raid[i], 'r')
-            list_of_data += [[x for x in file.readlines() if x != '_\n']]
-            file.close()
+            with open(problematische_Raid[i], 'r') as file:
+                list_of_data.append([x for x in file.readlines() if x != '_\n'])
         else:
-            list_of_data += [["*" * 4] * 64]
+            list_of_data.append(["*" * 3] * 64)
 
-    for i in range(len(list_of_data[0])):
+    if list_of_data[0][0] != "***":
+        cond = list_of_data[0]
+    else:
+        cond = list_of_data[1]
+    for i in range(len(cond)):
         small_list_of_data = []
         for j in range(len(list_of_data)):
-            small_list_of_data.append(list_of_data[j][i].strip())
+            small_list_of_data.append(list_of_data[j][i][:3])
 
-        indexes = [x for x in range(len(small_list_of_data)) if small_list_of_data[x] != '*' * 4]
+        indexes = []
+        recover_string = ""
+        # if problematische_index < len(list_of_data) // 2:
+        indexes = [ind for ind in range(len(small_list_of_data)) if small_list_of_data[ind] != "***"]
+        recover_string = list_of_data[problematische_index][i]
+        # else:
+        #     indexes = [ind for ind in range(len(list_of_data) // 2, len(list_of_data)) if ind != problematische_index]
+        #     recover_string = list_of_data[problematische_index][i]
 
-        lost_data.append(xor_two_str(small_list_of_data[indexes[0]], small_list_of_data[indexes[1]]).zfill(4))
+        if len(indexes) == 2:
+            a = small_list_of_data[indexes[0]]
+            b = small_list_of_data[indexes[1]]
+            buf = xor_two_str(small_list_of_data[indexes[0]], small_list_of_data[indexes[1]])
+            lost_data.append(buf)
+        else:
+            lost_data.append("****")  # Если данных недостаточно для восстановления
 
     ind = 0
     with open(disks[disks_index], 'w') as file:
@@ -56,25 +72,23 @@ def reconstruction(disks_index: int) -> None:
 def check_disks() -> None:
     for i in range(len(disks)):
         if not os.path.isfile(disks[i]):
-            print("Диск {} был пуст.".format(i))
+            print("\nДиск {} отсутствовал.".format(i))
             reconstruction(i)
             break
 
 def read() -> None:
     global disks_indexes
     if len(disks_indexes) == 0:
-        print('Диски пусты.')
+        print('\nДиски пусты.\n')
         return
 
     check_disks()
     while True:
-        input_data = input("Введите индекс строки которую хотите прочитать [0;63] или введите \"b\" / \"back\" для возврата: ")
-        if input_data == 'b' or input_data == 'back':
-            return
-        elif int(input_data) > 63:
+        input_data = input("\nВведите индекс строки которую хотите прочитать [0;63]: ")
+        if int(input_data) > 63:
             print("индекс вне диапазона [0;63].")
         elif int(input_data) not in disks_indexes:
-            print("Данные не доступны для данного адреса.")
+            print("Данных нет по данному адресу.")
         else:
             break
 
@@ -106,15 +120,15 @@ def read() -> None:
                     recover_string = list_of_data[int(input_data % 3) + 3][input_data]
                 result += xor_two_str(list_of_data[indexes[0]], recover_string)
 
-    print("Данные по адресу {}:".format(input_data))
-    print(result)
+    print("Данные по адресу {}: ".format(input_data))
+    print(f"{result}\n")
 
 def write() -> None:
     check_disks()
     global disks_indexes
 
     while True:
-        input_index = int(input("Введите индекс для записи [0;63]: "))
+        input_index = int(input("\nВведите индекс строки для записи в диапазоне[0;63]: "))
         if input_index > 63:
             print("введенный индекс вне диапазона [0;63].")
         else:
@@ -134,7 +148,7 @@ def write() -> None:
 
     # Обновляем данные для первой и второй группы
     excess_data1 = xor_two_str(blocks[0], blocks[1])
-    excess_data2 = xor_two_str(blocks[0], blocks[2])
+    excess_data2 = xor_two_str(blocks[2], blocks[3])
 
     disks_indexes.append(input_index)
     disks_indexes = list(set(disks_indexes))
@@ -146,9 +160,9 @@ def write() -> None:
     indexes = [x for x in range(len(l1)) if x != input_index % 3]
 
     l1[indexes[0]] = blocks[0]
-    l2[indexes[0]] = blocks[1]
+    l1[indexes[1]] = blocks[1]
 
-    l1[indexes[1]] = blocks[2]
+    l2[indexes[0]] = blocks[2]
     l2[indexes[1]] = blocks[3]
 
     data_for_write = []
@@ -167,20 +181,23 @@ def write() -> None:
             file.write(data_for_write[i][j])
         file.close()
 
-    print('Данные записаны под индексом {}.'.format(input_index))
+    print('Данные записаны в строку под индексом {}.\n'.format(input_index))
 
 def fillng() -> None:
     global disks_indexes
     for x in disks:
-        file = open(x, "r")
-        if len(file.readlines()) == 0:
-            file.close()
-            file = open(x, "a")
-            for i in range(64):
-                file.write("_" + '\n')
-            file.close()
+        if not os.path.exists(x):
+            with open(x, "w") as file:
+                for i in range(64):
+                    file.write("_\n")
         else:
-            return
+            with open(x, "r") as file:
+                if len(file.readlines()) == 0:
+                    with open(x, "a") as file_append:
+                        for i in range(64):
+                            file_append.write("_\n")
+                else:
+                    return
 
 if __name__ == '__main__':
     fillng()
@@ -191,9 +208,11 @@ if __name__ == '__main__':
             disks_indexes.append(i)
     file.close()
     while True:
-        print("Записать данные - 1.")
-        print("Прочитать данные - 2.")
-        print("Выход - 0.")
+        print("----- Меню действий -----")
+        print("[1] - Записать данные.")
+        print("[2] - Прочитать данные.")
+        print("[0] - Выход.")
+        print("-------------------------")
 
         x = input("Выберите действие: ")
         if x == '1':
