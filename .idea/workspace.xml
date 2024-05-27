@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e900cb73-f5d5-46ec-87a7-8724c134ee80" name="Changes" comment="Create project">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_0.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/disk_5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Programm/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="e900cb73-f5d5-46ec-87a7-8724c134ee80" name="Changes" comment="We just add PDF" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +19,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 6
@@ -73,28 +67,39 @@
       <option name="project" value="LOCAL" />
       <updated>1716729135832</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="write and read are complete. reconstruction is not yet">
+      <option name="closed" value="true" />
+      <created>1716759038331</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716759038331</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Finished version of this project, but without pdf and README.txt">
+      <option name="closed" value="true" />
+      <created>1716772234211</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1716772234211</updated>
+    </task>
+    <task id="LOCAL-00004" summary="We just add PDF">
+      <option name="closed" value="true" />
+      <created>1716774034395</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1716774034395</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Create project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create project" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Programm/main.py</url>
-          <line>88</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Programm/main.py</url>
-          <line>128</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="write and read are complete. reconstruction is not yet" />
+    <MESSAGE value="Finished version of this project, but without pdf and README.txt" />
+    <MESSAGE value="We just add PDF" />
+    <option name="LAST_COMMIT_MESSAGE" value="We just add PDF" />
   </component>
 </project>
