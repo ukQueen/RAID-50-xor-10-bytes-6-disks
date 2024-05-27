@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e900cb73-f5d5-46ec-87a7-8724c134ee80" name="Changes" comment="Final version">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_0.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programm/disk_5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RAID-50-xor-10-bytes-6-disks/Programm/disk_0.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RAID-50-xor-10-bytes-6-disks/Programm/disk_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RAID-50-xor-10-bytes-6-disks/Programm/disk_2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RAID-50-xor-10-bytes-6-disks/Programm/disk_3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RAID-50-xor-10-bytes-6-disks/Programm/disk_4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RAID-50-xor-10-bytes-6-disks/Programm/disk_5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RAID-50-xor-10-bytes-6-disks/RAID-50-xor-10-bytes-6-disks.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RAID-50-xor-10-bytes-6-disks/README.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,15 +36,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
