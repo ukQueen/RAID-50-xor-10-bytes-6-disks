@@ -60,12 +60,37 @@ def recovery(disks_index: int) -> None:
 
     print("Диск {} был восстановлен.".format(disks_index))
 
-def check_disks() -> None:
+
+def check_disks():
+    disk_indexes = []
+    can_recovery = True
     for i in range(len(disks)):
         if not os.path.isfile(disks[i]):
-            print("\nДиск {} отсутствовал.".format(i))
-            recovery(i)
-            break
+            disk_indexes.append(i)
+
+    if len(disk_indexes) == 2:
+        if not ((0 <= disk_indexes[0] <= 2 and 3 <= disk_indexes[1] <= 5) or
+                (0 <= disk_indexes[1] <= 2 and 3 <= disk_indexes[0] <= 5)):
+            can_recovery = False
+    elif len(disk_indexes) > 2:
+        can_recovery = False
+
+    if can_recovery:
+        for disk in disk_indexes:
+            print("\nДиск {} отсутствовал.".format(disk))
+            recovery(disk)
+    else:
+        output = "\nДиски "
+        for i in range(len(disk_indexes)):
+            output += str(disk_indexes[i])
+            if i < len(disk_indexes) - 1:
+                output += ', '
+
+        output += " отсутсвуют"
+        print(output)
+        print("\nДиски с данными невозможно востановить")
+        return "Данные невозможно востановить"
+
 
 def read() -> None:
     global index_of_disk
@@ -73,108 +98,109 @@ def read() -> None:
         print('\nДиски пусты.\n')
         return
 
-    check_disks()
-    while True:
-        index = input("\nВведите индекс строки которую хотите прочитать [0;63]: ")
-        if int(index) > 63:
-            print("индекс вне диапазона [0;63].")
-        elif int(index) not in index_of_disk:
-            print("Данных нет по данному адресу.")
-        else:
-            break
-
-    data = []
-
-    for i in range(len(disks)):
-        file = open(disks[i], 'r')
-        data += [file.readlines()]
-        file.close()
-
-    result = ''
-    index = int(index)
-    for i in range(len(data)):
-        if int(index % 3) != int(i % 3):
-            if len(data[i][int(index)][:-1]) == 3:
-                buf = str(data[i][int(index)][:-1])
-
-                if ''.join(chr(0)) in buf:
-                    buf = buf.replace(''.join(chr(0)), '')
-                result += buf
+    if check_disks() != "Данные невозможно востановить":
+        while True:
+            index = input("\nВведите индекс строки которую хотите прочитать [0;63]: ")
+            if int(index) > 63 or int(index) < 0:
+                print("индекс вне диапазона [0;63].")
+            elif int(index) not in index_of_disk:
+                print("Данных нет по данному адресу.")
             else:
-                if i < len(data)//2:
-                    indexes = [ind for ind in range(len(data)//2) if ind != int(index % 3) and ind != i]
-                    recover_string = data[int(index % 3)][index]
-                else:
-                    indexes = [ind for ind in range(len(data)//2, len(data)) if ind != int(index % 3) + 3 and ind != i]
-                    recover_string = data[int(index % 3) + 3][index]
-                result += xor(data[indexes[0]], recover_string)
+                break
 
-    print("Данные по адресу {}: ".format(index))
-    print(f"{result}\n")
+        data = []
+
+        for i in range(len(disks)):
+            file = open(disks[i], 'r')
+            data += [file.readlines()]
+            file.close()
+
+        result = ''
+        index = int(index)
+        for i in range(len(data)):
+            if int(index % 3) != int(i % 3):
+                if len(data[i][int(index)][:-1]) == 3:
+                    buf = str(data[i][int(index)][:-1])
+
+                    if ''.join(chr(0)) in buf:
+                        buf = buf.replace(''.join(chr(0)), '')
+                    result += buf
+                else:
+                    if i < len(data)//2:
+                        indexes = [ind for ind in range(len(data)//2) if ind != int(index % 3) and ind != i]
+                        recover_string = data[int(index % 3)][index]
+                    else:
+                        indexes = [ind for ind in range(len(data)//2, len(data)) if ind != int(index % 3) + 3 and ind != i]
+                        recover_string = data[int(index % 3) + 3][index]
+                    result += xor(data[indexes[0]], recover_string)
+
+        print("Данные по адресу {}: ".format(index))
+        print(f"{result}\n")
 
 
 def write() -> None:
-    check_disks()
-    global index_of_disk
+    if check_disks() != "Данные невозможно востановить":
+        global index_of_disk
 
-    while True:
-        index = int(input("\nВведите индекс строки для записи в диапазоне[0;63]: "))
-        if index > 63:
-            print("введенный индекс вне диапазона [0;63].")
-        else:
-            break
+        while True:
+            index = int(input("\nВведите индекс строки для записи в диапазоне[0;63]: "))
+            if  int(index) > 63 or int(index) < 0:
+                print("введенный индекс вне диапазона [0;63].")
+            else:
+                break
 
-    while True:
-        input_data = str(input("Введите строку (10 байт): "))
-        if len(input_data) != 10:
-            print("Длина строки должна состоять из 10 байт.")
-        else:
-            break
+        while True:
+            input_data = str(input("Введите строку (10 байт): "))
+            if len(input_data) != 10:
+                print("Длина строки должна состоять из 10 байт.")
+            else:
+                break
 
-    blocks = [input_data[:3], input_data[3:5], input_data[5:8], input_data[8:10]]
-    for i in range(len(blocks)):
-        while (len(blocks[i]) < 3):
-            blocks[i] = ''.join(chr(0)) + blocks[i]
+        blocks = [input_data[:3], input_data[3:5], input_data[5:8], input_data[8:10]]
+        for i in range(len(blocks)):
+            while (len(blocks[i]) < 3):
+                blocks[i] = ''.join(chr(0)) + blocks[i]
 
-    # Обновляем данные для первой и второй группы
-    excess_data1 = xor(blocks[0], blocks[1])
-    excess_data2 = xor(blocks[2], blocks[3])
+        # Обновляем данные для первой и второй группы
+        excess_data1 = xor(blocks[0], blocks[1])
+        excess_data2 = xor(blocks[2], blocks[3])
 
-    index_of_disk.append(index)
-    index_of_disk = list(set(index_of_disk))
-    l1 = ['', '', '']
-    l2 = ['', '', '']
+        index_of_disk.append(index)
+        index_of_disk = list(set(index_of_disk))
+        l1 = ['', '', '']
+        l2 = ['', '', '']
 
-    l1[index % 3] = excess_data1
-    l2[index % 3] = excess_data2
-    indexes = [x for x in range(len(l1)) if x != index % 3]
+        l1[index % 3] = excess_data1
+        l2[index % 3] = excess_data2
+        indexes = [x for x in range(len(l1)) if x != index % 3]
 
-    l1[indexes[0]] = blocks[0]
-    l1[indexes[1]] = blocks[1]
+        l1[indexes[0]] = blocks[0]
+        l1[indexes[1]] = blocks[1]
 
-    l2[indexes[0]] = blocks[2]
-    l2[indexes[1]] = blocks[3]
+        l2[indexes[0]] = blocks[2]
+        l2[indexes[1]] = blocks[3]
 
-    result_data = []
-    for x in disks:
-        file = open(x, "r")
-        result_data.append(file.readlines())
-        file.close()
+        result_data = []
+        for x in disks:
+            file = open(x, "r")
+            result_data.append(file.readlines())
+            file.close()
 
-    for i in range(len(RAID_5_1)):
-        result_data[i][index] = l1[i] + '\n'
-        result_data[i+3][index] = l2[i] + '\n'
+        for i in range(len(RAID_5_1)):
+            result_data[i][index] = l1[i] + '\n'
+            result_data[i+3][index] = l2[i] + '\n'
 
-    for i in range(len(disks)):
-        file = open(disks[i], "w")
-        for j in range(len(result_data[0])):
-            file.write(result_data[i][j])
-        file.close()
+        for i in range(len(disks)):
+            file = open(disks[i], "w")
+            for j in range(len(result_data[0])):
+                file.write(result_data[i][j])
+            file.close()
 
-    print('Данные записаны в строку под индексом {}.\n'.format(index))
+        print('Данные записаны в строку под индексом {}.\n'.format(index))
+
 
 def files() -> None:
-    global index_of_disk
+    global disks
     for x in disks:
         if not os.path.exists(x):
             with open(x, "w") as file:
@@ -182,12 +208,16 @@ def files() -> None:
                     file.write("_\n")
         else:
             with open(x, "r") as file:
-                if len(file.readlines()) == 0:
-                    with open(x, "a") as file_append:
+                lines = file.readlines()
+                if len(lines) == 0:
+                    with open(x, "w") as file_append:
                         for i in range(64):
                             file_append.write("_\n")
                 else:
-                    return
+                    with open(x, "w") as file:
+                        for i in range(64):
+                            file.write("_\n")
+
 
 if __name__ == '__main__':
     files()
